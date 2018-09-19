@@ -1,9 +1,9 @@
 <template>
     <div>
         <header-bar :title="title" :pre-page="prePage"></header-bar>
-        <p>
-            {{ follows }}
-        </p>
+
+        <!-- post-container -->
+        <post-container :post="post"></post-container>
         <tab-bar></tab-bar>
     </div>
 </template>
@@ -11,34 +11,36 @@
 <script>
     import HeaderBar from '../components/HeaderBar'
     import TabBar from '../components/TabBar'
-    import Common from '../assets/js/common'
+    import PostContainer from '../components/PostContainer'
+    import { Toast } from 'mint-ui';
 
     export default {
-        name: 'Index',
+        name: 'Post',
         data () {
             return {
-                title: '我的关注',
+                title: 'FMock',
                 prePage: '/',
-                follows: ''
+                post: {},
             }
-        },
-        created() {
-            Common.checkLogin() && this.getMyFollow();
         },
         components: {
             HeaderBar,
             TabBar,
+            PostContainer,
+        },
+        created () {
+            this.postDetail(this.$route.params.uuid)
         },
         methods: {
-            getMyFollow: function () {
-                let url = 'follows';
+            postDetail: function (uuid) {
+                let url = 'post/' + uuid;
                 this.$http.get(url).then(res => {
                     if (res.status === 200) {
-                        this.follows = res.body.data
+                        this.post = res.body.data
                     }
                 }, res => {
                     let instance = Toast({
-                        message: res.status + '糟糕，网络不给力，重试一下吧',
+                        message: res.status + res.body.message,
                         position: 'middle',
                     });
                     setTimeout(() => {
@@ -52,4 +54,8 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-
+<style scoped>
+    .post-container {
+        padding: 20px;
+    }
+</style>

@@ -8,7 +8,7 @@
         </mt-navbar>
 
         <!-- post-container -->
-        <post-container :posts="posts"></post-container>
+        <posts-container :posts="posts"></posts-container>
         <tab-bar></tab-bar>
     </div>
 </template>
@@ -16,9 +16,10 @@
 <script>
     import HeaderBar from '../components/HeaderBar'
     import TabBar from '../components/TabBar'
-    import PostContainer from '../components/PostContainer'
+    import PostsContainer from '../components/PostsContainer'
 
     import Vue from 'vue'
+    import { Toast } from 'mint-ui';
     import { Navbar, TabItem } from 'mint-ui';
     Vue.component(Navbar.name, Navbar);
     Vue.component(TabItem.name, TabItem);
@@ -30,13 +31,13 @@
                 title: 'FMock',
                 prePage: '/',
                 selected: 'post-new',
-                posts: [],
+                posts: {},
             }
         },
         components: {
             HeaderBar,
             TabBar,
-            PostContainer,
+            PostsContainer,
         },
         watch: {
             selected: function () {
@@ -52,11 +53,16 @@
                 this.$http.get(url).then(res => {
                     if (res.status === 200) {
                         this.posts = res.body.data
-                    } else {
-                        console.error('asdf')
                     }
                 }, res => {
-                    this.error = res.status;
+                    let instance = Toast({
+                        message: res.status + '糟糕，网络不给力，重试一下吧',
+                        position: 'middle',
+                    });
+                    setTimeout(() => {
+                        instance.close();
+                        this.$router.push('/');
+                    }, 4000);
                 })
             }
         }
@@ -67,5 +73,8 @@
 <style scoped>
     .mint-navbar {
         top: 60px;
+    }
+    .posts-container {
+        padding: 60px 8px 80px 8px;
     }
 </style>

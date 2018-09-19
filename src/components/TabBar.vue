@@ -1,25 +1,25 @@
 <template>
     <div class="tab-bar">
         <mt-tabbar fixed v-model="selected">
-            <mt-tab-item id="index">
+            <mt-tab-item id="/index">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-shouye"></use>
                 </svg>
                 <p>首页</p>
             </mt-tab-item>
-            <mt-tab-item id="follow">
+            <mt-tab-item id="/follow">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-guanzhu1-copy"></use>
                 </svg>
                 <p>关注</p>
             </mt-tab-item>
-            <mt-tab-item id="write">
+            <mt-tab-item id="/write">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-xiewenzhang"></use>
                 </svg>
                 <p>写文章</p>
             </mt-tab-item>
-            <mt-tab-item id="mime">
+            <mt-tab-item id="/mime">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-wode1-copy"></use>
                 </svg>

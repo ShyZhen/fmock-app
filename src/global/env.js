@@ -2,23 +2,18 @@
  * 全局变量
  * @type {string}
  */
+import Common from '../assets/js/common'
+// import store from '../store/index'
 
-const API_BASE_URL = 'http://localhost:82/api/V1';
-
-const VUE_RESOURCE_OPTION = {
-    root: API_BASE_URL,
-    headers: {
-        Accept: 'application/json',
-        Authorization: getAuthToken()
-    },
+const config = {
+    API_BASE_URL: 'http://192.168.204.112:82/api/V1',
+    ACCEPT: 'application/json',
+    // 获取本地存储的token
+    getAuthToken: function () {
+        // return store.getters.getLocalUserToken
+        return Common.getLocalUserToken("fmock-token")
+    }
 };
 
-export default {
-    API_BASE_URL,
-    VUE_RESOURCE_OPTION,
-}
+export default config
 
-// 获取本地存储的token
-function getAuthToken () {
-    return localStorage.getItem("fmock-token")
-}

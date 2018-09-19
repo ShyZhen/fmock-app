@@ -1,22 +1,25 @@
 <template>
     <div class="post-container">
-        <li v-for="post in posts.data" :key="post.id">
-            <router-link :to="{ path: '/post/' + post.uuid }">
+        <div v-if="Object.keys(post).length">
+            <li :key="post.id">
                 <p>{{ post }}</p>
-            </router-link>
-        </li>
+            </li>
+        </div>
+        <div v-else>
+            <li>
+                <p>暂无数据</p>
+            </li>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
         name: 'post-container',
-        props: ['posts'],
+        props: ['post'],
     }
 </script>
 
 <style scoped>
-    .post-container {
-        padding: 20px;
-    }
+
 </style>
