@@ -9,7 +9,7 @@
 <script>
     import HeaderBar from '../components/HeaderBar'
     import TabBar from '../components/TabBar'
-    import { Toast } from 'mint-ui';
+    import Common from '../assets/js/common'
 
     export default {
         name: 'User',
@@ -36,14 +36,9 @@
                     }
                 }, res => {
                     if (res.status === 404) {
-                        let instance = Toast({
-                            message: res.status + res.body.message,
-                            position: 'middle',
-                        });
-                        setTimeout(() => {
-                            instance.close();
-                            this.$router.push('/');
-                        }, 3000);
+                        Common.redirectLogin(res.status + res.body.message, '/', 2000);
+                    } else if (res.status !== 0 && res.status !== 404) {
+                        Common.redirectLogin( res.status + '糟糕！网络不给力，重试一下吧', '/', 2000);
                     }
                 })
             }

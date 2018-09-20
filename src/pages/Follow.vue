@@ -37,14 +37,9 @@
                         this.follows = res.body.data
                     }
                 }, res => {
-                    let instance = Toast({
-                        message: res.status + '糟糕，网络不给力，重试一下吧',
-                        position: 'middle',
-                    });
-                    setTimeout(() => {
-                        instance.close();
-                        this.$router.push('/');
-                    }, 4000);
+                    if (res.status !== 0) {
+                        Common.redirectLogin( res.status + '糟糕！网络不给力，重试一下吧', '/', 2000);
+                    }
                 })
             }
         }

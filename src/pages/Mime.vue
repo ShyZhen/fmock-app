@@ -19,7 +19,6 @@
 <script>
     import HeaderBar from '../components/HeaderBar'
     import TabBar from '../components/TabBar'
-    import { Toast } from 'mint-ui'
     import Common from '../assets/js/common'
 
     export default {
@@ -53,7 +52,9 @@
                         Common.redirectLogin('登出成功', 'index', 500)
                     }
                 }, res => {
-                    Common.redirectLogin('您的token已过期，请重新登陆', '/login', 2000)
+                    if (res.status !== 0) {
+                        Common.redirectLogin( res.status + '糟糕！网络不给力，重试一下吧', '/', 2000);
+                    }
                 })
             }
         }

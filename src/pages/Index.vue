@@ -19,7 +19,7 @@
     import PostsContainer from '../components/PostsContainer'
 
     import Vue from 'vue'
-    import { Toast } from 'mint-ui';
+    import Common from '../assets/js/common'
     import { Navbar, TabItem } from 'mint-ui';
     Vue.component(Navbar.name, Navbar);
     Vue.component(TabItem.name, TabItem);
@@ -49,20 +49,15 @@
         },
         methods: {
             getAllPosts: function (type) {
-                var url = 'posts?sort=' + type;
+                let url = 'posts?sort=' + type;
                 this.$http.get(url).then(res => {
                     if (res.status === 200) {
                         this.posts = res.body.data
                     }
                 }, res => {
-                    let instance = Toast({
-                        message: res.status + '糟糕，网络不给力，重试一下吧',
-                        position: 'middle',
-                    });
-                    setTimeout(() => {
-                        instance.close();
-                        this.$router.push('/');
-                    }, 4000);
+                    if (res.status !== 0) {
+                        Common.redirectLogin( res.status + '糟糕！网络不给力，重试一下吧', '/', 2000);
+                    }
                 })
             }
         }

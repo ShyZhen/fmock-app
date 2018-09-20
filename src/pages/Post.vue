@@ -12,7 +12,7 @@
     import HeaderBar from '../components/HeaderBar'
     import TabBar from '../components/TabBar'
     import PostContainer from '../components/PostContainer'
-    import { Toast } from 'mint-ui';
+    import Common from '../assets/js/common'
 
     export default {
         name: 'Post',
@@ -39,14 +39,9 @@
                         this.post = res.body.data
                     }
                 }, res => {
-                    let instance = Toast({
-                        message: res.status + res.body.message,
-                        position: 'middle',
-                    });
-                    setTimeout(() => {
-                        instance.close();
-                        this.$router.push('/');
-                    }, 4000);
+                    if (res.status !== 0) {
+                        Common.redirectLogin( res.status + '糟糕！网络不给力，重试一下吧', '/', 2000);
+                    }
                 })
             }
         }

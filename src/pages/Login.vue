@@ -37,7 +37,7 @@
         },
         methods: {
             validateEmail: function () {
-                var regEmail = /^([a-zA-Z0-9]+[_|\-|\\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+                let regEmail = /^([a-zA-Z0-9]+[_|\-|\\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
                 if (this.email === '') {
                     this.state = 'error';
                     Toast('请输入邮箱');
@@ -53,8 +53,8 @@
             },
             login: function () {
                 if (this.validateEmail()) {
-                    var url = 'login';
-                    var data = {
+                    let url = 'login';
+                    let data = {
                         email: this.email,
                         password: this.password,
                     };
@@ -67,7 +67,9 @@
                             Common.redirectLogin('登录成功', '/index', 500)
                         }
                     }, (res) => {
-                        Toast(res.status + res.body.message);
+                        if (res.status !== 0) {
+                            Common.redirectLogin( res.status + '糟糕！网络不给力，重试一下吧', '/login', 2000);
+                        }
                     })
                 }
             },
