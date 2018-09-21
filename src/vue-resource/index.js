@@ -14,7 +14,7 @@ Vue.http.interceptors.push(function (request, next) {
         Common.indicator.close();
         // 0 是后台路由保护认证失败返回401，由于cors问题判断为0
         if (response.status === 0) {
-            Common.redirectLogin('糟糕！Token过期了，重新登录试试', '/login', 2000)
+            Common.redirect('糟糕！Token过期了，重新登录试试', '/login', 2000)
         }
     })
 });

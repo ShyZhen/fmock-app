@@ -1,6 +1,6 @@
 <template>
     <div>
-        <header-bar :title="title" :pre-page="prePage"></header-bar>
+        <header-bar :title="title" :pre-page="prePage" :rightIcon="rightIcon"></header-bar>
         <div v-if="Object.keys(myInfo).length">
             <li>
                 <p>
@@ -27,10 +27,11 @@
             return {
                 title: '个人信息',
                 prePage: '/',
+                rightIcon: 'more',
                 myInfo: ''
             }
         },
-        created() {
+        mounted() {
             Common.checkLogin() && this.getMyInfo();
         },
         components: {
@@ -49,11 +50,11 @@
                         Common.clearLocalUserToken('fmock-token');
                         Common.clearLocalUserToken('fmock-user-info');
                         this.$store.dispatch('removeUserInfo', res.body.userInfo);
-                        Common.redirectLogin('登出成功', 'index', 500)
+                        Common.redirect('登出成功', 'index', 500)
                     }
                 }, res => {
                     if (res.status !== 0) {
-                        Common.redirectLogin( res.status + '糟糕！网络不给力，重试一下吧', '/', 2000);
+                        Common.redirect(res.status + res.body.message, '/', 2000);
                     }
                 })
             }

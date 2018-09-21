@@ -2,7 +2,7 @@
     <div class="post-container">
         <div v-if="Object.keys(post).length">
             <li :key="post.id">
-                <p>{{ post }}</p>
+                <p v-html="post.content"></p>
             </li>
         </div>
         <div v-else>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <header-bar :title="title" :pre-page="prePage"></header-bar>
+        <header-bar :title="title" :pre-page="prePage" :rightIcon="rightIcon"></header-bar>
 
         <!-- post-container -->
         <post-container :post="post"></post-container>
@@ -20,6 +20,7 @@
             return {
                 title: 'FMock',
                 prePage: '/',
+                rightIcon: 'more',
                 post: {},
             }
         },
@@ -28,7 +29,7 @@
             TabBar,
             PostContainer,
         },
-        created () {
+        mounted() {
             this.postDetail(this.$route.params.uuid)
         },
         methods: {
@@ -40,7 +41,7 @@
                     }
                 }, res => {
                     if (res.status !== 0) {
-                        Common.redirectLogin( res.status + '糟糕！网络不给力，重试一下吧', '/', 2000);
+                        Common.redirect(res.status + res.body.message, '/', 2000);
                     }
                 })
             }

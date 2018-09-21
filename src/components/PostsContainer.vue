@@ -6,7 +6,7 @@
                     <p>{{ post.userinfo }}</p>
                 </router-link>
                 <router-link :to="{ path: '/post/' + post.uuid }">
-                    <p>{{ post.content }}</p>
+                    <p v-html="post.content"></p>
                 </router-link>
                 <hr>
             </li>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <header-bar :title="title" :pre-page="prePage"></header-bar>
+        <header-bar :title="title" :pre-page="prePage" :rightIcon="rightIcon"></header-bar>
         {{ user }}
         <tab-bar></tab-bar>
     </div>
@@ -17,6 +17,7 @@
             return {
                 title: 'FMock',
                 prePage: '/',
+                rightIcon: 'more',
                 user: ''
             }
         },
@@ -24,7 +25,7 @@
             HeaderBar,
             TabBar,
         },
-        created () {
+        mounted() {
             this.postDetail(this.$route.params.uuid)
         },
         methods: {
@@ -35,10 +36,8 @@
                         this.user = res.body.data
                     }
                 }, res => {
-                    if (res.status === 404) {
-                        Common.redirectLogin(res.status + res.body.message, '/', 2000);
-                    } else if (res.status !== 0 && res.status !== 404) {
-                        Common.redirectLogin( res.status + '糟糕！网络不给力，重试一下吧', '/', 2000);
+                    if (res.status !== 0) {
+                        Common.redirect(res.status + res.body.message, '/', 2000);
                     }
                 })
             }

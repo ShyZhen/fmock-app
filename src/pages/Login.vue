@@ -64,11 +64,11 @@
                             Common.setLocalUserToken('fmock-token', 'Bearer ' + res.body.accessToken);
                             Common.setLocalUserToken('fmock-user-info', JSON.stringify(res.body.userInfo));
                             this.$store.dispatch('setUserInfo', res.body.userInfo);
-                            Common.redirectLogin('登录成功', '/index', 500)
+                            Common.redirect('登录成功', '/index', 500)
                         }
                     }, (res) => {
                         if (res.status !== 0) {
-                            Common.redirectLogin( res.status + '糟糕！网络不给力，重试一下吧', '/login', 2000);
+                            Common.redirect(res.status + res.body.message, '/login', 2000);
                         }
                     })
                 }

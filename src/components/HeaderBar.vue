@@ -4,7 +4,7 @@
             <router-link :to="prePage" slot="left">
                 <mt-button icon="back">返回</mt-button>
             </router-link>
-            <mt-button icon="more" slot="right"></mt-button>
+                <mt-button :icon="rightIcon" slot="right"></mt-button>
         </mt-header>
     </div>
 </template>
@@ -17,12 +17,13 @@
 
     export default {
         name: 'header-bar',
-        props: ['title', 'prePage'],
+        props: ['title', 'prePage', 'rightIcon'],
     }
 </script>
 
 <style scoped>
     .mint-header {
+        top: 0;
         height: 60px;
         background-color: #3C3F41;
     }

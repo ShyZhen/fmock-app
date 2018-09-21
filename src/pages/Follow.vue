@@ -1,6 +1,6 @@
 <template>
     <div>
-        <header-bar :title="title" :pre-page="prePage"></header-bar>
+        <header-bar :title="title" :pre-page="prePage" :rightIcon="rightIcon"></header-bar>
         <p>
             {{ follows }}
         </p>
@@ -19,10 +19,11 @@
             return {
                 title: '我的关注',
                 prePage: '/',
+                rightIcon: 'search',
                 follows: ''
             }
         },
-        created() {
+        mounted() {
             Common.checkLogin() && this.getMyFollow();
         },
         components: {
@@ -38,7 +39,7 @@
                     }
                 }, res => {
                     if (res.status !== 0) {
-                        Common.redirectLogin( res.status + '糟糕！网络不给力，重试一下吧', '/', 2000);
+                        Common.redirect(res.status + res.body.message, '/', 2000);
                     }
                 })
             }

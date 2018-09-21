@@ -32,7 +32,7 @@ const indicator = {
 };
 
 // 弹出消息并重定向
-function redirectLogin(message, redirectPath, duration) {
+function redirect(message, redirectPath, duration) {
     let instance = Toast({
         message: message,
         position: 'middle',
@@ -48,7 +48,7 @@ function checkLogin() {
     let token = getLocalUserToken("fmock-token");
     let userInfo = getLocalUserToken("fmock-user-info");
     if (!token || !userInfo){
-        redirectLogin('抱歉您还未登陆', '/login', 2000);
+        redirect('抱歉您还未登陆', '/login', 2000);
         return false
     } else {
         return true
@@ -59,7 +59,7 @@ export default {
     getLocalUserToken,
     setLocalUserToken,
     clearLocalUserToken,
-    redirectLogin,
+    redirect,
     checkLogin,
     indicator,
 }

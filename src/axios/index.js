@@ -15,7 +15,7 @@ axios.interceptors.request.use(function (config) {
     return config;
 }, function (error) {
     Common.indicator.close();
-    Common.redirectLogin('糟糕！您的网络貌似有问题', '/login', 2000);
+    Common.redirect('糟糕！您的网络貌似有问题', '/login', 2000);
     return Promise.reject(error);
 });
 
@@ -28,6 +28,6 @@ axios.interceptors.response.use(function (response) {
     console.log('error response');
     console.log(error.response);
     Common.indicator.close();
-    Common.redirectLogin('坏了！服务器可能崩溃了', '/login', 2000);
+    Common.redirect('坏了！服务器可能崩溃了', '/login', 2000);
     return Promise.reject(error);
 });

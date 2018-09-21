@@ -1,6 +1,7 @@
 <template>
     <div>
-        <header-bar :title="title" :pre-page="prePage"></header-bar>
+        <header-bar :title="title" :pre-page="prePage" :rightIcon="rightIcon"></header-bar>
+        <!--<search-bar></search-bar>-->
         <mt-navbar fixed v-model="selected">
             <mt-tab-item id="post-new">最新</mt-tab-item>
             <mt-tab-item id="post-hot">最热</mt-tab-item>
@@ -15,6 +16,7 @@
 
 <script>
     import HeaderBar from '../components/HeaderBar'
+    import SearchBar from '../components/SearchBar'
     import TabBar from '../components/TabBar'
     import PostsContainer from '../components/PostsContainer'
 
@@ -30,6 +32,7 @@
             return {
                 title: 'FMock',
                 prePage: '/',
+                rightIcon: 'search',
                 selected: 'post-new',
                 posts: {},
             }
@@ -38,13 +41,14 @@
             HeaderBar,
             TabBar,
             PostsContainer,
+            SearchBar,
         },
         watch: {
             selected: function () {
                 this.getAllPosts(this.selected)
             }
         },
-        created () {
+        mounted() {
             this.getAllPosts(this.selected)
         },
         methods: {
@@ -56,7 +60,7 @@
                     }
                 }, res => {
                     if (res.status !== 0) {
-                        Common.redirectLogin( res.status + '糟糕！网络不给力，重试一下吧', '/', 2000);
+                        Common.redirect(res.status + res.body.message, '/', 2000);
                     }
                 })
             }
