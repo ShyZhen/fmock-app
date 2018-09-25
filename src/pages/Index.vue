@@ -73,7 +73,7 @@
     .mint-navbar {
         top: 60px;
     }
-    .posts-container {
+    .post-container {
         padding: 60px 8px 80px 8px;
     }
 </style>

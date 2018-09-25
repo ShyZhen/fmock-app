@@ -13,4 +13,6 @@ export default {
 
 <style>
 @import 'assets/css/app.less';
+@import "assets/css/markdown.css";
+/*@import '../node_modules/quill/dist/quill.snow.css';*/
 </style>

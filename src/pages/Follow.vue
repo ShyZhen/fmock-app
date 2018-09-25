@@ -1,9 +1,10 @@
 <template>
     <div>
         <header-bar :title="title" :pre-page="prePage" :rightIcon="rightIcon"></header-bar>
-        <p>
-            {{ follows }}
-        </p>
+
+        <!-- post-container -->
+        <posts-container :posts="follows"></posts-container>
+
         <tab-bar></tab-bar>
     </div>
 </template>
@@ -12,6 +13,7 @@
     import HeaderBar from '../components/HeaderBar'
     import TabBar from '../components/TabBar'
     import Common from '../assets/js/common'
+    import PostsContainer from '../components/PostsContainer'
 
     export default {
         name: 'Index',
@@ -29,6 +31,7 @@
         components: {
             HeaderBar,
             TabBar,
+            PostsContainer,
         },
         methods: {
             getMyFollow: function () {
@@ -48,4 +51,8 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-
+<style scoped>
+    .post-container {
+        padding: 20px 8px 80px 8px;
+    }
+</style>

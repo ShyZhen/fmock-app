@@ -2,11 +2,11 @@
     <div>
         <header-bar :title="title" :pre-page="prePage" :rightIcon="rightIcon"></header-bar>
         <div v-if="Object.keys(myInfo).length">
-            <li>
+            <div>
                 <p>
                     {{ myInfo }}
                 </p>
-            </li>
+            </div>
             <mt-button type="primary" size="large" @click.native="logout">退出</mt-button>
         </div>
         <div v-else>

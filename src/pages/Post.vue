@@ -52,6 +52,6 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     .post-container {
-        padding: 20px;
+        padding: 20px 8px 80px 8px;
     }
 </style>
