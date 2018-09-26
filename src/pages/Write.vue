@@ -144,5 +144,8 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+    .quill-editor {
+        height: 300px;
+        margin: 0 0 20% 0;
+    }
 </style>

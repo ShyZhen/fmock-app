@@ -11,6 +11,7 @@
                         </router-link>
                         <router-link :to="{ path: '/post/' + post.uuid }">
                             <p v-html="post.content"></p>
+                            <p>{{ post.follow_num }}</p>
                             <p>{{ post.like_num }}</p>
                             <p>{{ post.dislike_num }}</p>
                         </router-link>

@@ -35,7 +35,7 @@
         },
         methods: {
             getMyFollow: function () {
-                let url = 'follows';
+                let url = 'follow/posts';
                 this.$http.get(url).then(res => {
                     if (res.status === 200) {
                         this.follows = res.body.data

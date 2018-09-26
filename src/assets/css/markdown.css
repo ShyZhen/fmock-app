@@ -84,3 +84,6 @@
 .post-container dd {
     margin-left: 0;
 }
+.post-container .ql-align-center {
+    text-align: center;
+}
