@@ -37,7 +37,7 @@
         data () {
             return {
                 title: '发声',
-                prePage: '/',
+                prePage: false,
                 postTitle: '',
                 postContent: '',
                 anonymous: false,

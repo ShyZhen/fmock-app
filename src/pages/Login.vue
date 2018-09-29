@@ -25,7 +25,7 @@
         data () {
             return {
                 title: '登录',
-                prePage: '/',
+                prePage: false,
                 email: '',
                 password: '',
                 state: ''

@@ -1,9 +1,9 @@
 <template>
     <div class="header-bar">
         <mt-header fixed :title="title">
-            <router-link :to="prePage" slot="left">
-                <mt-button icon="back">返回</mt-button>
-            </router-link>
+            <!--<router-link :to="prePage" slot="left">-->
+                <mt-button icon="back" @click="goBack" slot="left">返回</mt-button>
+            <!--</router-link>-->
                 <mt-button :icon="rightIcon" slot="right"></mt-button>
         </mt-header>
     </div>
@@ -18,6 +18,14 @@
     export default {
         name: 'header-bar',
         props: ['title', 'prePage', 'rightIcon'],
+        methods: {
+            // 返回前一页
+            goBack: function () {
+                if (this.prePage) {
+                    this.$router.back()
+                }
+            }
+        }
     }
 </script>
 

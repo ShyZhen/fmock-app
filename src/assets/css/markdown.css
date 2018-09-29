@@ -33,7 +33,7 @@
     margin: 0;
 }
 .post-container li {
-    line-height: 24px;
+    line-height: 1.5;
 }
 
 .post-container pre {
@@ -56,7 +56,7 @@
     border-left: 3px solid #e0e0e0;
     padding: 0 0 0 10px;
     margin-left: 0;
-    font-size:14px;
+    font-size:12px;
     line-height:20px;
     color:#bfbfbf;
 }

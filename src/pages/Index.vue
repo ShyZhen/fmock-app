@@ -8,8 +8,20 @@
             <mt-tab-item id="post-anonymous">只看匿名</mt-tab-item>
         </mt-navbar>
 
-        <!-- post-container -->
-        <posts-container :posts="posts"></posts-container>
+         <!--post-container-->
+        <posts-container :selected="selected"></posts-container>
+        <!--<mt-tab-container v-model="selected">-->
+            <!--<mt-tab-container-item id="post-new">-->
+                <!--<posts-container selected="post-new"></posts-container>-->
+            <!--</mt-tab-container-item>-->
+            <!--<mt-tab-container-item id="post-hot">-->
+                <!--<posts-container selected="post-hot"></posts-container>-->
+            <!--</mt-tab-container-item>-->
+            <!--<mt-tab-container-item id="post-anonymous">-->
+                <!--<posts-container selected="post-anonymous"></posts-container>-->
+            <!--</mt-tab-container-item>-->
+        <!--</mt-tab-container>-->
+
         <tab-bar></tab-bar>
     </div>
 </template>
@@ -21,20 +33,20 @@
     import PostsContainer from '../components/PostsContainer'
 
     import Vue from 'vue'
-    import Common from '../assets/js/common'
-    import { Navbar, TabItem } from 'mint-ui';
+    import { Navbar, TabItem, TabContainer, TabContainerItem } from 'mint-ui';
     Vue.component(Navbar.name, Navbar);
     Vue.component(TabItem.name, TabItem);
+    Vue.component(TabContainer.name, TabContainer);
+    Vue.component(TabContainerItem.name, TabContainerItem);
 
     export default {
         name: 'Index',
         data () {
             return {
-                title: 'FMock',
-                prePage: '/',
+                title: 'FMock 墨客',
+                prePage: false,
                 rightIcon: 'search',
                 selected: 'post-new',
-                posts: {},
             }
         },
         components: {
@@ -43,28 +55,6 @@
             PostsContainer,
             SearchBar,
         },
-        watch: {
-            selected: function () {
-                this.getAllPosts(this.selected)
-            }
-        },
-        mounted() {
-            this.getAllPosts(this.selected)
-        },
-        methods: {
-            getAllPosts: function (type) {
-                let url = 'posts?sort=' + type;
-                this.$http.get(url).then(res => {
-                    if (res.status === 200) {
-                        this.posts = res.body.data
-                    }
-                }, res => {
-                    if (res.status !== 0) {
-                        Common.redirect(res.status + res.body.message, '/', 2000);
-                    }
-                })
-            }
-        }
     }
 </script>
 

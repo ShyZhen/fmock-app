@@ -26,7 +26,7 @@
         data () {
             return {
                 title: '个人信息',
-                prePage: '/',
+                prePage: false,
                 rightIcon: 'more',
                 myInfo: ''
             }

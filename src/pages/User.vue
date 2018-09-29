@@ -16,7 +16,7 @@
         data () {
             return {
                 title: 'FMock',
-                prePage: '/',
+                prePage: true,
                 rightIcon: 'more',
                 user: ''
             }

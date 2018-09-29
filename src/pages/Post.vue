@@ -19,7 +19,7 @@
         data () {
             return {
                 title: 'FMock',
-                prePage: '/',
+                prePage: true,
                 rightIcon: 'more',
                 post: {},
             }
@@ -37,7 +37,8 @@
                 let url = 'post/' + uuid;
                 this.$http.get(url).then(res => {
                     if (res.status === 200) {
-                        this.post = res.body.data
+                        this.post = res.body.data;
+                        this.title = this.post.title + ' - FMock 墨客';
                     }
                 }, res => {
                     if (res.status !== 0) {

@@ -4,9 +4,9 @@
             <!--<div class="ql-editor">-->
                 <div v-if="Object.keys(post).length">
                     <li class="post-item" :key="post.id">
-                        <p>{{ post.userinfo.username }}</p>
-                        <p>{{ post.userinfo.bio }}</p>
-                        <img :src="post.userinfo.avatar" alt="">
+                        <p>{{ post.userInfo.username }}</p>
+                        <p>{{ post.userInfo.bio }}</p>
+                        <img :src="post.userInfo.avatar" alt="">
                         <p>{{ post.title }}</p>
                         <p v-html="post.content"></p>
                     </li>
