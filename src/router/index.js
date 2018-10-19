@@ -28,21 +28,10 @@ export default new Router({
     base: '/',
     routes,
     // scrollBehavior (to, from, savedPosition) {
-    //     console.log(to);
-    //     console.log(from);
-    //     console.log(savedPosition);
-    //     return {
-    //         x:0,y:0
-    //     }
-    //     if (savedPosition || typeof savedPosition === 'undefined') {
-    //         from.meta.isKeepAlive = typeof from.meta.isKeepAlive === 'undefined' ? undefined : false;
-    //         to.meta.isKeepAlive = typeof to.meta.isKeepAlive === 'undefined' ? undefined : true;
-    //         if (savedPosition) {
-    //             return savedPosition
-    //         }
+    //     if (savedPosition) {
+    //         return savedPosition
     //     } else {
-    //         from.meta.isKeepAlive = typeof from.meta.isKeepAlive === 'undefined' ? undefined : true;
-    //         to.meta.isKeepAlive = typeof to.meta.isKeepAlive === 'undefined' ? undefined : false;
+    //         return { x: 0, y: 0 }
     //     }
     // }
 })

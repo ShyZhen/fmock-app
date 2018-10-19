@@ -3,39 +3,43 @@
         <!--<div class="ql-container ql-snow">-->
             <!--<div class="ql-editor">-->
 
-                <div v-if="posts.length"
-                     v-infinite-scroll="loadMore"
-                     infinite-scroll-disabled="loading"
-                     infinite-scroll-distance="10">
-                    <li class="post-item" v-for="post in posts" :key="post.id">
-                        <div class="post-detail-block">
-                            <div class="post-detai-user">
-                                <img class="avatar" :src="post.userInfo.avatar" alt="">
-                                <div class="user-info">
-                                    <router-link :to="{ path: '/user/' + post.userInfo.uuid }">
-                                        <p class="user-name">{{ post.userInfo.username }}</p>
-                                    </router-link>
-                                    <p class="user-bio">{{ post.userInfo.bio }}</p>
+                <mt-loadmore :top-method="pullToRefresh" ref="pullToRefresh">
+                    <div v-if="posts.length">
+                        <div class="post-item" v-for="post in posts" :key="post.id + '-' + selected">
+                            <div class="post-detail-block">
+                                <div class="post-detai-user">
+                                    <img class="avatar" :src="post.userInfo.avatar" alt="">
+                                    <div class="user-info">
+                                        <router-link :to="{ path: '/user/' + post.userInfo.uuid }">
+                                            <p class="user-name">{{ post.userInfo.username }}</p>
+                                        </router-link>
+                                        <p class="user-bio">{{ post.userInfo.bio }}</p>
+                                    </div>
+                                </div>
+                                <div class="post-detai-abstract">
+                                    <div>
+                                        <router-link :to="{ path: '/post/' + post.uuid }">
+                                            <p class="post-title">{{ post.title }}</p>
+                                            <p class="post-content" v-html="post.content"></p>
+                                        </router-link>
+                                        <p>{{ post.follow_num }}</p>
+                                        <p>{{ post.like_num }}</p>
+                                        <p>{{ post.dislike_num }}</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="post-detai-abstract">
-                                <div>
-                                    <router-link :to="{ path: '/post/' + post.uuid }">
-                                        <p class="post-title">{{ post.title }}</p>
-                                        <p class="post-content" v-html="post.content"></p>
-                                    </router-link>
-                                    <p>{{ post.follow_num }}</p>
-                                    <p>{{ post.like_num }}</p>
-                                    <p>{{ post.dislike_num }}</p>
-                                </div>
-                            </div>
+                            <hr>
                         </div>
-                        <hr>
-                    </li>
-                    <p v-show="loadingIcon">
-                        <mt-spinner type="snake" class="loading-more"></mt-spinner>
-                    </p>
-                </div>
+                    </div>
+                </mt-loadmore>
+                <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading" spinner="spiral">
+                    <span slot="no-more">
+                        我们是有底线的
+                    </span>
+                    <span slot="no-results" class="nothing">
+                        啊嘞！这里什么都没有
+                    </span>
+                </infinite-loading>
 
             <!--</div>-->
         <!--</div>-->
@@ -44,11 +48,10 @@
 
 <script>
     import Vue from 'vue'
-    import { Spinner, InfiniteScroll } from 'mint-ui';
+    import { Loadmore } from 'mint-ui';
+    import InfiniteLoading from 'vue-infinite-loading';
     import Common from '../assets/js/common'
-    Vue.use(InfiniteScroll);
-    Vue.component(Spinner.name, Spinner);
-
+    Vue.component(Loadmore.name, Loadmore);
 
     export default {
         name: 'posts-container',
@@ -56,38 +59,28 @@
         data () {
             return {
                 posts: [],
-                pageNum: 1,
-                loading: false,
-                loadingIcon: false,
             }
-        },
-        watch: {
-            selected: function () {
-                this.posts = [];
-                this.pageNum = 1;
-                this.loading = false;
-                this.loadingIcon = false;
-
-                this.init(this.selected);
-                window.scroll(0, 0);
-            }
-        },
-        mounted() {
-            this.init(this.selected)
         },
         methods: {
-            init: function (selected) {
+            getPostList: function(pageNum, $state) {
                 let url;
-                if (selected === 'follow') {
-                    url = 'follow/posts?page=' + this.pageNum;
+                if (this.selected === 'follow') {
+                    url = 'follow/posts?page=' + pageNum;
                 } else {
-                    url = 'posts?sort=' + this.selected + '&page=' + this.pageNum;
+                    url = 'posts?sort=' + this.selected + '&page=' + pageNum;
                 }
                 this.$http.get(url).then(res => {
                     if (res.status === 200) {
-                        this.loading = (res.body.data.data.length < 10);
-                        this.posts = this.posts.concat(res.body.data.data);
-                        this.loadingIcon = false;
+                        console.log(this.selected, pageNum);
+                        if (res.body.data.data.length) {
+                            this.posts = this.posts.concat(res.body.data.data);
+                            $state.loaded();
+                            if (res.body.data.data.length < 10) {
+                                $state.complete();
+                            }
+                        } else {
+                            $state.complete();
+                        }
                     }
                 }, res => {
                     if (res.status !== 0) {
@@ -96,20 +89,32 @@
                 })
             },
             //无限加载函数
-            loadMore() {
-                this.loading = true;
-                this.pageNum += 1;
-                this.loadingIcon = true;
+            infiniteHandler: function($state) {
+                let pageNum = this.posts.length / 10 + 1;
+                this.getPostList(pageNum, $state)
+            },
 
-                setTimeout(() => {
-                    this.init(this.selected);
-                }, 500);
+            // infiniteReset: function() {
+            //     this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+            // },
+
+            // 下拉刷新
+            pullToRefresh: function() {
+                this.posts = [];
+                this.infiniteHandler();
+                this.$refs.pullToRefresh.onTopLoaded();
             }
+        },
+        components: {
+            InfiniteLoading,
         },
     }
 </script>
 
 <style scoped>
+    .post-container {
+        height: 100%;
+    }
     .post-detail-block {
         padding: 15px;
         margin: 0 2px 16px 2px;

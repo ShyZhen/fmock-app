@@ -9,18 +9,19 @@
         </mt-navbar>
 
          <!--post-container-->
-        <posts-container :selected="selected"></posts-container>
-        <!--<mt-tab-container v-model="selected">-->
-            <!--<mt-tab-container-item id="post-new">-->
-                <!--<posts-container selected="post-new"></posts-container>-->
-            <!--</mt-tab-container-item>-->
-            <!--<mt-tab-container-item id="post-hot">-->
-                <!--<posts-container selected="post-hot"></posts-container>-->
-            <!--</mt-tab-container-item>-->
-            <!--<mt-tab-container-item id="post-anonymous">-->
-                <!--<posts-container selected="post-anonymous"></posts-container>-->
-            <!--</mt-tab-container-item>-->
-        <!--</mt-tab-container>-->
+        <!--<posts-container :selected="selected"></posts-container>-->
+
+        <mt-tab-container v-model="selected">
+            <mt-tab-container-item id="post-new">
+                <posts-container selected="post-new"></posts-container>
+            </mt-tab-container-item>
+            <mt-tab-container-item id="post-hot">
+                <posts-container selected="post-hot"></posts-container>
+            </mt-tab-container-item>
+            <mt-tab-container-item id="post-anonymous">
+                <posts-container selected="post-anonymous"></posts-container>
+            </mt-tab-container-item>
+        </mt-tab-container>
 
         <tab-bar></tab-bar>
     </div>
