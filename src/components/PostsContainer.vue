@@ -8,12 +8,12 @@
                         <div class="post-item" v-for="post in posts" :key="post.id + '-' + selected">
                             <div class="post-detail-block">
                                 <div class="post-detai-user">
-                                    <img class="avatar" :src="post.userInfo.avatar" alt="">
+                                    <img class="avatar" :src="post.user_info.avatar" alt="">
                                     <div class="user-info">
-                                        <router-link :to="{ path: '/user/' + post.userInfo.uuid }">
-                                            <p class="user-name">{{ post.userInfo.username }}</p>
+                                        <router-link :to="{ path: '/user/' + post.user_info.uuid }">
+                                            <p class="user-name">{{ post.user_info.username }}</p>
                                         </router-link>
-                                        <p class="user-bio">{{ post.userInfo.bio }}</p>
+                                        <p class="user-bio">{{ post.user_info.bio }}</p>
                                     </div>
                                 </div>
                                 <div class="post-detai-abstract">
