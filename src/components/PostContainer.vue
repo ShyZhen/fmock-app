@@ -2,7 +2,7 @@
     <div class="post-container">
         <!--<div class="ql-container ql-snow">-->
             <!--<div class="ql-editor">-->
-                <div v-if="Object.keys(post).length">
+                <div v-if="Object.keys(post).length"> 
                     <li class="post-item" :key="post.id">
                         <p>{{ post.user_info.username }}</p>
                         <p>{{ post.user_info.bio }}</p>
