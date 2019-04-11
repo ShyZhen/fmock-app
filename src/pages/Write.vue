@@ -45,7 +45,7 @@
                     modules: {
                         toolbar: {
                             container:[
-                                [{ 'header': [1, 2, 3, false] }],
+                                [{ 'header':  3}],
                                 ['bold', 'italic', 'underline', 'strike',],
                                 ['blockquote', 'code-block', 'link', 'image',],
                                 [{ 'color': [] }, { 'background': [] }],
@@ -56,7 +56,7 @@
                     },
                     placeholder: 'Compose an epic...',
                     readOnly: false,
-                    theme: 'snow'
+                    theme: 'bubble'
                 },
             }
         },
