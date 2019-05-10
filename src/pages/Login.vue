@@ -61,7 +61,7 @@
                     this.$http.post(url, data).then((res) => {
                         // 登录成功 存 token 和 userInfo
                         if (res.status === 200) {
-                            Common.setLocalUserToken('fmock-token', 'Bearer ' + res.body.accessToken);
+                            Common.setLocalUserToken('fmock-token', 'Bearer ' + res.body.access_token);
                             Common.setLocalUserToken('fmock-user-info', JSON.stringify(res.body.userInfo));
                             this.$store.dispatch('setUserInfo', res.body.userInfo);
                             Common.redirect('登录成功', '/index', 500)

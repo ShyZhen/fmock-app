@@ -56,7 +56,7 @@
                     },
                     placeholder: 'Compose an epic...',
                     readOnly: false,
-                    theme: 'bubble'
+                    theme: 'bubble'    // snow
                 },
             }
         },
@@ -118,12 +118,17 @@
                 this.editor.insertEmbed(range.index, 'image', url)
             },
             submitPost: function () {
+                // 必须有文字内容和title
                 if (this.postTitle && this.postContent) {
                     let data = {
                         title: this.postTitle,
                         content: this.postContent,
                         anonymous: this.anonymous,
+                        summary: this.editor.getText().slice(0, 80),
+                        poster: this.imgUrlFun(this.postContent),
+                        type: 'share'
                     };
+                    // console.log(data);
                     let url = 'post';
                     this.$http.post(url, data).then(res => {
                         if (res.status === 201) {
@@ -137,6 +142,14 @@
                 } else {
                     Toast('啊嘞！是不是少写了什么')
                 }
+            },
+            // 正则匹配第一幅图片,作为海报传递给后台
+            imgUrlFun: function (str) {
+                let data = '';
+                str.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/, function (match, capture) {
+                    data =  capture;
+                });
+                return data
             },
         }
     }
