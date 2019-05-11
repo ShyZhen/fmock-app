@@ -1,0 +1,89 @@
+/**
+* 文章显示自定义css
+*/
+
+.post-container img {
+    max-width: 100%;
+}
+.post-container p {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.post-container h1, h2, h3 {
+    border-bottom: 1px solid #EFEAEA;
+    padding-bottom: 8px;
+}
+.post-container h1 {
+    font-size: 24px;
+    line-height: 30px;
+}
+.post-container h2 {
+    font-size: 21px;
+    line-height: 26px;
+}
+.post-container h3 {
+    font-size: 18px;
+    line-height: 23px;
+}
+.post-container a:visited {
+    /*color: purple;*/
+}
+.post-container ul, ol {
+    padding: 0 0 0 18px;
+    margin: 0;
+}
+.post-container li {
+    line-height: 1.5;
+}
+
+.post-container pre {
+    font-family: Consolas, Monaco, Andale Mono, monospace;
+    background-color: #23241f;
+    color: #f8f8f2;
+    overflow-x: scroll;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border-left: 3px solid #ffcd36;
+}
+.post-container aside {
+    display: block;
+    float: right;
+    width: 390px;
+}
+.post-container blockquote {
+    border-left: 3px solid #e0e0e0;
+    padding: 0 0 0 10px;
+    margin-left: 0;
+    font-size:12px;
+    line-height:20px;
+    color:#bfbfbf;
+}
+.post-container hr {
+    text-align: center;
+    height: 1px;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+}
+.post-container dl {
+    padding: 0;
+}
+.post-container dl dt {
+    padding: 10px 0;
+    margin-top: 16px;
+    font-size: 1em;
+    font-style: italic;
+    font-weight: bold;
+}
+.post-container dl dd {
+    padding: 0 16px;
+    margin-bottom: 16px;
+}
+.post-container dd {
+    margin-left: 0;
+}
+.post-container .ql-align-center {
+    text-align: center;
+}
